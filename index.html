@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WeGoC | We Go Care</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #1a1a1a;
+      background: #f7fafc;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; height: auto; }
+    .container { width: min(1180px, 92%); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0d9488;
+      letter-spacing: 0.5px;
+    }
+    .logo span { color: #111827; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: #374151;
+      font-size: 0.96rem;
+    }
+    .nav-cta {
+      background: #0d9488;
+      color: white;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(13, 148, 136, 0.18);
+    }
+
+    .hero {
+      padding: 72px 0 54px;
+      background:
+        linear-gradient(135deg, rgba(13,148,136,0.10), rgba(255,255,255,0.90)),
+        radial-gradient(circle at top right, rgba(14,165,233,0.10), transparent 35%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      background: rgba(13,148,136,0.10);
+      color: #0f766e;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(2.3rem, 4vw, 4.3rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      color: #0f172a;
+    }
+    .hero p {
+      font-size: 1.08rem;
+      color: #475569;
+      max-width: 620px;
+      margin-bottom: 26px;
+    }
+    .hero p strong { color: #0f172a; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .btn-primary, .btn-secondary {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: #0d9488;
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(13, 148, 136, 0.20);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #0f172a;
+      border: 1px solid rgba(15,23,42,0.08);
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid rgba(15,23,42,0.08);
+      color: #334155;
+      font-size: 0.92rem;
+    }
+    .hero-card {
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.12);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+    .hero-card img {
+      height: 430px;
+      object-fit: cover;
+    }
+    .hero-card-content {
+      padding: 22px;
+    }
+    .hero-card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .hero-card-text {
+      color: #64748b;
+      font-size: 0.96rem;
+    }
+
+    section { padding: 76px 0; }
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 42px;
+    }
+    .section-head h2 {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      margin-bottom: 14px;
+      color: #0f172a;
+    }
+    .section-head p {
+      color: #64748b;
+      font-size: 1.02rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.05);
+      text-align: center;
+    }
+    .stat-card h3 {
+      font-size: 2rem;
+      color: #0d9488;
+      margin-bottom: 8px;
+    }
+    .stat-card p {
+      color: #64748b;
+      font-size: 0.96rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.07);
+      border: 1px solid rgba(15,23,42,0.05);
+    }
+    .service-card img {
+      height: 220px;
+      object-fit: cover;
+    }
+    .service-card-body {
+      padding: 24px;
+    }
+    .service-card h3 {
+      margin-bottom: 10px;
+      color: #0f172a;
+      font-size: 1.2rem;
+    }
+    .service-card p {
+      color: #64748b;
+      font-size: 0.97rem;
+    }
+
+    .value-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 30px;
+      align-items: center;
+    }
+    .value-image {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.10);
+    }
+    .value-image img {
+      height: 520px;
+      object-fit: cover;
+    }
+    .value-list {
+      display: grid;
+      gap: 16px;
+    }
+    .value-item {
+      background: #fff;
+      padding: 22px;
+      border-radius: 22px;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.05);
+    }
+    .value-item h3 {
+      color: #0f172a;
+      margin-bottom: 6px;
+      font-size: 1.08rem;
+    }
+    .value-item p {
+      color: #64748b;
+      font-size: 0.96rem;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .process-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.05);
+    }
+    .step {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #0d9488;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .process-card h3 {
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+    .process-card p {
+      color: #64748b;
+      font-size: 0.96rem;
+    }
+
+    .cta {
+      padding: 86px 0;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, #0f766e, #0d9488);
+      color: white;
+      border-radius: 30px;
+      padding: 54px 40px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+      box-shadow: 0 22px 50px rgba(13, 148, 136, 0.25);
+    }
+    .cta-box h2 {
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.88);
+      max-width: 600px;
+    }
+    .cta-panel {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 26px;
+    }
+    .cta-panel ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: rgba(255,255,255,0.92);
+      font-size: 0.98rem;
+      margin-bottom: 18px;
+    }
+    .cta-panel li::before {
+      content: "✓ ";
+      font-weight: 800;
+    }
+    .cta-panel .btn-secondary {
+      width: 100%;
+      background: white;
+      color: #0f172a;
+      border: none;
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border-top: 1px solid rgba(15,23,42,0.08);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .value-wrap,
+      .cta-box,
+      .services-grid,
+      .process-grid,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-grid,
+      .value-wrap,
+      .cta-box,
+      .services-grid,
+      .process-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      .hero-card img,
+      .value-image img {
+        height: 320px;
+      }
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">WeGo<span>C</span></div>
+      <nav class="nav-links">
+        <a href="#about">关于我们</a>
+        <a href="#services">服务项目</a>
+        <a href="#value">核心价值</a>
+        <a href="#process">服务流程</a>
+      </nav>
+      <a href="#contact" class="nav-cta">联系我们</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">We Go Care · Inbound China Healthcare</div>
+          <h1>把中国优质医疗，带向世界</h1>
+          <p>
+            WeGoC 致力于连接<strong>中国优质医院、口腔机构与海外客户</strong>，
+            以高效、可信、个性化的方式，提供跨境体检、种牙、专科咨询与健康管理服务。
+          </p>
+          <p>
+            我们相信，优质中国医疗不仅服务中国本土，更可以作为一种能力与标准，
+            <strong>输出到全球华人和国际客户</strong>。
+          </p>
+          <div class="hero-actions">
+            <a href="#services" class="btn-primary">探索服务</a>
+            <a href="#contact" class="btn-secondary">预约咨询</a>
+          </div>
+          <div class="hero-tags">
+            <div class="tag">跨境体检</div>
+            <div class="tag">高端种牙</div>
+            <div class="tag">人工全程服务</div>
+            <div class="tag">海外华人健康入口</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80" alt="现代医疗机构与国际化医疗服务" />
+          <div class="hero-card-content">
+            <div class="hero-card-title">值得信赖的中国医疗连接服务</div>
+            <div class="hero-card-text">从医院筛选、项目匹配到预约协调与后续跟进，WeGoC 以人工顾问模式，为海外客户匹配更适合的中国医疗资源。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>重新定义跨境医疗连接</h2>
+          <p>我们不是冰冷的平台，而是以高质量人工服务为核心，帮助海外客户更高效地连接中国优质医疗机构。</p>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <h3>China+</h3>
+            <p>聚焦中国优质医疗资源，建立可信合作网络</p>
+          </div>
+          <div class="stat-card">
+            <h3>1:1</h3>
+            <p>人工顾问全程跟进，提升跨境医疗确定性</p>
+          </div>
+          <div class="stat-card">
+            <h3>Global</h3>
+            <p>服务海外华人及国际客户的中国就医需求</p>
+          </div>
+          <div class="stat-card">
+            <h3>Premium</h3>
+            <p>强调质量、体验、效率与服务透明度</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>我们的核心服务</h2>
+          <p>从健康管理到口腔治疗，WeGoC 将高质量医疗项目打包为更易理解、更易决策的跨境服务产品。</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1200&q=80" alt="高端体检服务" />
+            <div class="service-card-body">
+              <h3>高端体检</h3>
+              <p>面向海外客户提供中国高质量体检套餐，强调效率、深度筛查、结果解读与个性化健康建议。</p>
+            </div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=1200&q=80" alt="种牙与口腔治疗" />
+            <div class="service-card-body">
+              <h3>种牙与口腔修复</h3>
+              <p>连接优质口腔医院与医生资源，为海外客户提供更具性价比与专业度的种植牙、修复与口腔治疗方案。</p>
+            </div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80" alt="专科医疗咨询与跨境就医" />
+            <div class="service-card-body">
+              <h3>专科咨询与就医协调</h3>
+              <p>围绕专科门诊、二诊意见、预约协助与跨境就医安排，帮助客户更快速找到合适的中国医疗资源。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="value">
+      <div class="container value-wrap">
+        <div class="value-image">
+          <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80" alt="医生与患者沟通的国际化医疗服务场景" />
+        </div>
+        <div>
+          <div class="section-head" style="text-align:left; margin:0 0 26px;">
+            <h2>Why WeGoC</h2>
+            <p>我们的价值不只是“帮你预约”，而是把复杂、陌生、信息不对称的跨境医疗过程，变成一次更高确定性的服务体验。</p>
+          </div>
+          <div class="value-list">
+            <div class="value-item">
+              <h3>优质中国医疗输出</h3>
+              <p>把中国成熟、优质、具性价比的医疗服务能力，转化为海外用户可理解、可选择、可信赖的产品与体验。</p>
+            </div>
+            <div class="value-item">
+              <h3>人工筛选，减少决策成本</h3>
+              <p>不要求用户自己在海量信息中筛选医院和医生，而由 WeGoC 进行初步匹配与推荐。</p>
+            </div>
+            <div class="value-item">
+              <h3>服务体验优先</h3>
+              <p>从咨询、预约、沟通到后续跟进，强调清晰流程、及时响应与跨境场景下的陪伴式服务。</p>
+            </div>
+            <div class="value-item">
+              <h3>从华人市场出发，走向国际</h3>
+              <p>先服务海外华人，再逐步扩展到更广泛的国际医疗服务需求，构建面向全球的中国医疗入口。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <h2>服务流程</h2>
+          <p>当前阶段，我们采用人工顾问模式，确保每一位客户都能获得更有针对性的服务与安排。</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-card">
+            <div class="step">1</div>
+            <h3>提交需求</h3>
+            <p>告诉我们你的体检、种牙或专科医疗需求，以及时间、预算与偏好。</p>
+          </div>
+          <div class="process-card">
+            <div class="step">2</div>
+            <h3>匹配机构</h3>
+            <p>WeGoC 根据需求筛选适合的医院、科室与服务方案，给出清晰建议。</p>
+          </div>
+          <div class="process-card">
+            <div class="step">3</div>
+            <h3>人工协调</h3>
+            <p>由顾问协助完成咨询、预约、流程说明与注意事项沟通。</p>
+          </div>
+          <div class="process-card">
+            <div class="step">4</div>
+            <h3>就医与跟进</h3>
+            <p>客户完成服务后，我们继续支持结果解读、复诊协调与后续服务对接。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <h2>We Go Care，连接世界与中国优质医疗</h2>
+            <p>如果你正在寻找值得信赖的中国体检、口腔或专科医疗资源，WeGoC 将为你提供更省心、更高效、更有温度的跨境医疗连接服务。</p>
+          </div>
+          <div class="cta-panel">
+            <ul>
+              <li>海外华人优先服务</li>
+              <li>高端体检与种牙方向重点布局</li>
+              <li>人工顾问模式，非自动化冷平台</li>
+              <li>从中国优质医院走向全球客户</li>
+            </ul>
+            <a href="mailto:hello@wegoc.com" class="btn-secondary">hello@wegoc.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div><strong>WeGoC</strong> · We Go Care</div>
+      <div>Inbound China Healthcare · Bringing Premium China Healthcare to the World</div>
+    </div>
+  </footer>
+</body>
+</html>
